@@ -16,6 +16,8 @@ import time
 from langchain_community.embeddings import HuggingFaceBgeEmbeddings
 from langchain_groq import ChatGroq
 
+from langchain.chains.conversation.memory import ConversationBufferWindowMemory
+
 # Read from .env file 
 qdrant_host = os.getenv('QDRANT_HOST')
 
@@ -35,6 +37,18 @@ def main():
     
     # Grab the user question
     user_question = st.text_input("Ask your question!",placeholder='Can you summarize for me \'The Quest for Bliss\' story')
+
+    # conversational_memory_length = 5
+    # memory = ConversationBufferWindowMemory(k=conversational_memory_length)
+
+    # Setup up chat history object
+    # if 'chat_history' not in st.session_state:
+    #     st.session_state.chat_history=[]
+    # else:
+    #     for message in st.session_state.chat_history:
+    #         memory.save_context({'input':message['human']},{'output':message['AI']})
+
+    
 
     # Check if the user has asked a question
     if user_question:
@@ -60,12 +74,13 @@ def main():
         # llm = OpenAI()
         llm = ChatGroq(temperature=0, model_name="mixtral-8x7b-32768", groq_api_key='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')
 
+
         # Initialize the retrieval QA chain
         qa = RetrievalQA.from_chain_type(
             llm = llm,
             chain_type="stuff",
             retriever= doc_store.as_retriever(),
-            return_source_documents=True
+            return_source_documents=True,
         )
 
         # Render the user question on the screen
