@@ -1,0 +1,10 @@
+langchain
+qdrant-client
+openai
+langchain-openai
+langchain-community
+tiktoken
+streamlit
+python-dotenv
+langchain_groq
+sentence_transformers
