@@ -34,7 +34,7 @@ def main():
     st.header('Chat with me!')
     
     # Grab the user question
-    user_question = st.text_input("Ask your question!")
+    user_question = st.text_input("Ask your question!",placeholder='Can you summarize for me \'The Quest for Bliss\' story')
 
     # Check if the user has asked a question
     if user_question:
