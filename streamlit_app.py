@@ -34,6 +34,8 @@ def main():
 
     # Heading for the app
     st.header('Chat with me!')
+
+    additional_ctx = st.text_input("Additional context", value='Tell me a story that helps me understand how to deal with')
     
     # Grab the user question
     user_question = st.text_input("Ask your question!",placeholder='Prompt')
@@ -42,7 +44,10 @@ def main():
     # Check if the user has asked a question
     if user_question:
 
-        prompt = 'Tell me a story that helps me understand how to deal with ' + user_question
+        prompt = additional_ctx + ' ' + user_question
+
+        print(prompt)
+        time.sleep(20)
 
         # Configure the embedding model
         # embeddings_model = OpenAIEmbeddings(model='text-embedding-3-small', dimensions=384)
