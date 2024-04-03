@@ -37,21 +37,13 @@ def main():
     
     # Grab the user question
     user_question = st.text_input("Ask your question!",placeholder='Can you summarize for me \'The Quest for Bliss\' story')
-
-    # conversational_memory_length = 5
-    # memory = ConversationBufferWindowMemory(k=conversational_memory_length)
-
-    # Setup up chat history object
-    # if 'chat_history' not in st.session_state:
-    #     st.session_state.chat_history=[]
-    # else:
-    #     for message in st.session_state.chat_history:
-    #         memory.save_context({'input':message['human']},{'output':message['AI']})
-
     
 
     # Check if the user has asked a question
     if user_question:
+
+        prompt = 'Tell me a story that helps me understand how to deal with ' + user_question
+        print(prompt)
 
         # Configure the embedding model
         # embeddings_model = OpenAIEmbeddings(model='text-embedding-3-small', dimensions=384)
@@ -87,11 +79,22 @@ def main():
         st.markdown(f':green[Question:] {user_question}')
 
         # Hook up the user question
-        response = qa.invoke(user_question)
+        response = qa.invoke(prompt)
 
         # Print the response below
         st.markdown(':green[Response:]')
         st.write(response['result'])
+
+        # Extract source docs meta data
+        sources = response['source_documents']
+        
+        st.markdown(f':green[Sources used: ]')
+        
+        for source in sources:
+            source = source.page_content[1:-1]
+
+            st.write(f':green[{source}]')
+            st.divider()
 
 
 if __name__ == '__main__':
