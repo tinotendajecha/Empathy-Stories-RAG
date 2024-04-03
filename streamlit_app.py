@@ -36,14 +36,13 @@ def main():
     st.header('Chat with me!')
     
     # Grab the user question
-    user_question = st.text_input("Ask your question!",placeholder='Can you summarize for me \'The Quest for Bliss\' story')
+    user_question = st.text_input("Ask your question!",placeholder='Prompt')
     
 
     # Check if the user has asked a question
     if user_question:
 
         prompt = 'Tell me a story that helps me understand how to deal with ' + user_question
-        print(prompt)
 
         # Configure the embedding model
         # embeddings_model = OpenAIEmbeddings(model='text-embedding-3-small', dimensions=384)
