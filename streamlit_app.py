@@ -18,6 +18,8 @@ from langchain_groq import ChatGroq
 
 from langchain.chains.conversation.memory import ConversationBufferWindowMemory
 
+
+
 # Read from .env file 
 qdrant_host = os.getenv('QDRANT_HOST')
 
@@ -68,7 +70,7 @@ def main():
 
         # Initialize the OpenAI model
         # llm = OpenAI()
-        llm = ChatGroq(temperature=0, model_name="mixtral-8x7b-32768", groq_api_key='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')
+        llm = ChatGroq(temperature=0, model_name="mixtral-8x7b-32768", groq_api_key=os.getenv('GROQ_API_KEY'))
 
 
         # Initialize the retrieval QA chain
