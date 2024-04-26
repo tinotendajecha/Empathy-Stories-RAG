@@ -82,7 +82,7 @@ def main():
         )
 
         # Render the user question on the screen
-        st.markdown(f':green[Question:] {user_question}')
+        st.markdown(f':green[Qsn:] {user_question}')
 
         # Hook up the user question
         response = qa.invoke(prompt)
